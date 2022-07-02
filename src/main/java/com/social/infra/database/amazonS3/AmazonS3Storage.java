@@ -26,10 +26,9 @@ public class AmazonS3Storage implements ObjectStorage {
 
     @Override
     public InputStream getObject(String key) {
-        //TODO
         S3Client s3Client = S3Client.builder().region(Region.SA_EAST_1).build();
-        s3Client.getObject(builder -> builder.bucket("photos-insta").key(key));
-        return null;
+        return s3Client.getObjectAsBytes(builder -> builder.bucket("photos-insta")
+                .key(key)).asInputStream();
     }
 
     private String getUniqueKey() {
