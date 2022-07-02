@@ -42,7 +42,9 @@ public class PostInteractor implements BaseUseCase<Post> {
         return null;
     }
 
-    public List<Post> findAllByAuthor(User author) {
-        return postRepository.findByAuthor(author);
+    public List<Post> findAllByAuthor(Long userId) {
+        List<Post> posts = postRepository.findByAuthor(userId);
+        posts.forEach(post-> post.getImage().setContent(objectStorage.getObject(post.getImage().getUniqueName())));
+        return posts;
     }
 }

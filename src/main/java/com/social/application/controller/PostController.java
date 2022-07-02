@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/posts")
@@ -23,7 +25,11 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(postInteractor.findAll(), HttpStatus.OK);
+        List<Post> posts = postInteractor.findAll();
+        List<PostDto> postDtoList = posts.stream().map(PostDto::fromModel).collect(Collectors.toList());
+        return postDtoList.isEmpty() ?
+                new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR) :
+                new ResponseEntity<>(postDtoList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -37,8 +43,12 @@ public class PostController {
         return new ResponseEntity<>(postInteractor.save(postModel), HttpStatus.OK);
     }
 
-//    @GetMapping()
-//    public ResponseEntity<?> getByAuthor(User author) {
-//        return new ResponseEntity<>(postInteractor.findAllByAuthor(author), HttpStatus.OK);
-//    }
+    @GetMapping("/author/{userId}")
+    public ResponseEntity<?> getByAuthor(@PathVariable Long userId) {
+        List<Post> posts = postInteractor.findAllByAuthor(userId);
+        List<PostDto> postDtoList = posts.stream().map(PostDto::fromModel).collect(Collectors.toList());
+        return postDtoList.isEmpty() ?
+                new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR) :
+                new ResponseEntity<>(postDtoList, HttpStatus.OK);
+    }
 }

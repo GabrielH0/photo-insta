@@ -20,7 +20,9 @@ public interface PostJpaRepository extends CrudRepository<PostJpaModel, Long> {
     @Query("select post, file from PostJpaModel post left join S3File file on post.image = file")
     List<PostJpaModel> findAll();
 
-    List<PostJpaModel> findAllByAuthor(UserJpaModel author);
+    @Query("select post, file from PostJpaModel post left join S3File file on post.image = file" +
+            " where post.author.id = :authorId")
+    List<PostJpaModel> findAllByAuthorId(Long authorId);
 
     @Repository
     class PostPostgresRepository implements PostRepository {
@@ -49,8 +51,8 @@ public interface PostJpaRepository extends CrudRepository<PostJpaModel, Long> {
         }
 
         @Override
-        public List<Post> findByAuthor(User author) {
-            return postJpaRepository.findAllByAuthor(UserJpaModel.fromModel(author)).stream().map(PostJpaModel::toModel)
+        public List<Post> findByAuthor(Long userId) {
+            return postJpaRepository.findAllByAuthorId(userId).stream().map(PostJpaModel::toModel)
                     .collect(Collectors.toList());
         }
     }
