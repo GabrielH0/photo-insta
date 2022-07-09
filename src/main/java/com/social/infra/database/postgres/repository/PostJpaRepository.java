@@ -1,10 +1,8 @@
-package com.social.infra.database.repository;
+package com.social.infra.database.postgres.repository;
 
 import com.social.domain.adapter.PostRepository;
 import com.social.domain.model.Post;
-import com.social.domain.model.User;
-import com.social.infra.database.model.PostJpaModel;
-import com.social.infra.database.model.UserJpaModel;
+import com.social.infra.database.postgres.model.PostJpaModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

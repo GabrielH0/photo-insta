@@ -3,15 +3,14 @@ package com.social.useCase;
 import com.social.domain.adapter.ObjectStorage;
 import com.social.domain.adapter.PostRepository;
 import com.social.domain.model.Post;
-import com.social.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class PostInteractor implements BaseUseCase<Post> {
 
-    private PostRepository postRepository;
-    private ObjectStorage objectStorage;
+    private final PostRepository postRepository;
+    private final ObjectStorage objectStorage;
 
     @Autowired
     public PostInteractor(PostRepository postRepository, ObjectStorage objectStorage) {

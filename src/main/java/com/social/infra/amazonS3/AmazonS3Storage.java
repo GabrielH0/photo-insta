@@ -1,4 +1,4 @@
-package com.social.infra.database.amazonS3;
+package com.social.infra.amazonS3;
 
 import com.social.domain.adapter.ObjectStorage;
 import com.social.domain.model.ImageFile;

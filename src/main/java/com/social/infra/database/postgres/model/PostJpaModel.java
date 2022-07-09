@@ -1,4 +1,4 @@
-package com.social.infra.database.model;
+package com.social.infra.database.postgres.model;
 
 import com.social.domain.model.Coordinates;
 import com.social.domain.model.Post;
@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Data
 @Table(name = "Post")
@@ -39,6 +40,7 @@ public class PostJpaModel {
                 .description(description)
                 .coordinates(coordinates)
                 .image(image.toModel())
+                .likes(new ArrayList<>())
                 .build();
     }
 

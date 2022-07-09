@@ -1,4 +1,4 @@
-package com.social.infra.database.model;
+package com.social.infra.database.postgres.model;
 
 import com.social.domain.model.User;
 import lombok.*;

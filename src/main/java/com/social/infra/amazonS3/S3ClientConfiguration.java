@@ -1,4 +1,4 @@
-package com.social.infra.database.amazonS3;
+package com.social.infra.amazonS3;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;

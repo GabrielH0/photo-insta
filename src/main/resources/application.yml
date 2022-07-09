@@ -9,6 +9,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: photo-insta
+      username: root
+      password: example
+      auto-index-creation: true
+      authentication-database: admin
 
 server:
   port: 8090
